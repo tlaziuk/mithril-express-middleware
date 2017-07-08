@@ -1,8 +1,9 @@
 mithril-express-middleware
 ===================
 [![Build Status](https://travis-ci.org/tlaziuk/mithril-express-middleware.svg?branch=master)](https://travis-ci.org/tlaziuk/mithril-express-middleware)
-[![Dependency Status](https://david-dm.org/tlaziuk/mithril-express-middleware.svg)](https://david-dm.org/tlaziuk/mithril-express-middleware)
-[![devDependency Status](https://david-dm.org/tlaziuk/mithril-express-middleware/dev-status.svg)](https://david-dm.org/tlaziuk/mithril-express-middleware#info=devDependencies)
+[![dependencies Status](https://david-dm.org/tlaziuk/mithril-express-middleware/status.svg)](https://david-dm.org/tlaziuk/mithril-express-middleware)
+[![devDependencies Status](https://david-dm.org/tlaziuk/mithril-express-middleware/dev-status.svg)](https://david-dm.org/tlaziuk/mithril-express-middleware?type=dev)
+[![peerDependencies Status](https://david-dm.org/tlaziuk/mithril-express-middleware/peer-status.svg)](https://david-dm.org/tlaziuk/mithril-express-middleware?type=peer)
 
 use mithril routes with express
 
@@ -19,7 +20,7 @@ usage
 ```typescript
 import mithrilExpress from "mithril-express-middleware";
 
-// use a mock window so we can run mithril on the server
+// mock a window so we can run mithril on the server
 import mock from "mithril-express-middleware/mock";
 
 import app from "./your-express-app";
