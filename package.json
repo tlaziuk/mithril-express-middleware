@@ -4,8 +4,8 @@
   "description": "express middleware for mithril.js projects",
   "main": "index.js",
   "scripts": {
-    "prepublish": "npm run tsc",
     "lint": "find . -name '*.ts' -print | grep -v .d.ts | grep -v node_modules | xargs tslint -t verbose",
+    "prepare": "npm run tsc",
     "pretest": "npm run lint",
     "test": "mocha -r ts-node/register *.spec.ts",
     "tsc": "tsc"
