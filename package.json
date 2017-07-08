@@ -1,0 +1,47 @@
+{
+  "name": "mithril-express-middleware",
+  "version": "1.1.0",
+  "description": "express middleware for mithril.js projects",
+  "main": "index.js",
+  "scripts": {
+    "prepublish": "npm run tsc",
+    "lint": "find . -name '*.ts' -print | grep -v .d.ts | grep -v node_modules | xargs tslint -t verbose",
+    "pretest": "npm run lint",
+    "test": "mocha -r ts-node/register *.spec.ts",
+    "tsc": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tlaziuk/mithril-express-middleware.git"
+  },
+  "keywords": [
+    "mithril",
+    "express"
+  ],
+  "author": "Tomek Łaziuk <tlaziuk@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tlaziuk/mithril-express-middleware/issues"
+  },
+  "homepage": "https://github.com/tlaziuk/mithril-express-middleware",
+  "peerDependencies": {
+    "express": "^4.0.0",
+    "mithril": "~1.1.0"
+  },
+  "devDependencies": {
+    "@types/chai": "~4.0.0",
+    "@types/mocha": "~2.2.0",
+    "chai": "~4.0.0",
+    "mithril": "~1.1.0",
+    "mocha": "~2.2.0",
+    "ts-node": "~3.1.0",
+    "tslib": "~1.7.0",
+    "tslint": "~5.4.0",
+    "typescript": "~2.4.0"
+  },
+  "dependencies": {
+    "@types/express": "^4.0.0",
+    "@types/mithril": "~1.1.0",
+    "mithril-node-render": "^2.1.0"
+  }
+}
