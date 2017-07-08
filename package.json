@@ -1,6 +1,6 @@
 {
   "name": "mithril-express-middleware",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "express middleware for mithril.js projects",
   "main": "index.js",
   "scripts": {
