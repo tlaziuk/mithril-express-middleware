@@ -4,3 +4,14 @@ node_js:
   - 4
   - 5
   - 6
+  - 7
+  - 8
+deploy:
+  provider: npm
+  email: tlaziuk@gmail.com
+  api_key:
+    secure: BFB2qcccuF3q9gsLylUEfthF7DadZRSIf+Y5JcTWAQGzPXp/uf6OxMDnDcm5TluOVouGfivh4ai+uCb4ranh21w/QPTcqjzjTQYL/DE8wg/JLMvz0gRniLyXJbkqZzYT1cDNaCKFyqmsUwVn0p07aj+hmQ0DjOqc9Ilqf6ePtGpkvSOWWcrg04jkyhSYNHa1FR5mGIl6nmxOzK5LKDk/QYIZOGkvte2WMX3XKg6XPkW8JEN7JOQuvH53gp+h5BpCqMUwL/fNJ+ybr+dHme0l+3sURIpTC2X7aytcuOuXaeTIimN5sCkz5W++T/ax8xgyQ0sxtGsv7ztYZI+xRPDEVf4TjV/S3/3rA7wSsQXY5l6SdhEV+mNhvDp7ff4rAt5GZHRiFnOb2Bsk7fiDrcSVRjZJJB6ny2vrs6HNt5uJS/fdA4sobLTEEQg4tf+eUPH2uPSquwUOEaFiY3hWOtU3CdpDJrRuON2OONjvh9o822ixH+1Fm1eBBizOEJPFGI+a+QhpEaHcxzoy+uLnUUJMKydqlNH0OBBKV9KWrwLkCQcj4u9xi6sh1QGZgRvFMnvms7S0wtf/TsAWre3PChgfWrBLIHm0KSV0D3eIEgFqM5iCI+lMGeeXJI4IuxNQ8nIn2AoxEyX2jPEQn2pOwCI4ltbu7p5oC5jVlVotl5eCRxs=
+  on:
+    tags: true
+    branch: master
+    repo: tlaziuk/mithril-express-middleware
