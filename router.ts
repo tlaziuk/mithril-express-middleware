@@ -21,10 +21,7 @@ export async function router(routes: RouteDefs, path: string, defaultPath: strin
         const matchArr = pathname.match(matcher);
         if (matchArr !== null) {
             const keys = route.match(/:[^\/]+/g) || [];
-            const [
-                match,
-                ...values,
-            ] = matchArr;
+            const [match, ...values] = matchArr;
             // tslint:disable-next-line:forin
             for (const i in keys) {
                 const key = keys[i];
@@ -35,10 +32,9 @@ export async function router(routes: RouteDefs, path: string, defaultPath: strin
         }
     }
     if (path !== defaultPath) {
-        return await router(routes, path);
-    } else {
-        throw new Error(`Could not resolve default route ${defaultPath}`);
+        return await router(routes, defaultPath);
     }
+    throw new Error(`Could not resolve route '${path}'`);
 }
 
 export default router;

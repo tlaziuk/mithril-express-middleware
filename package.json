@@ -4,7 +4,8 @@
   "description": "express middleware for mithril.js projects",
   "main": "index.js",
   "scripts": {
-    "lint": "find . -name '*.ts' -print | grep -v .d.ts | grep -v node_modules | xargs tslint -t verbose",
+    "clean": "find . -name '*.js' -o -name '*.d.ts' | grep -v node_modules/ | grep -v types/ | xargs rm -v",
+    "lint": "find . -name '*.ts' -print | grep -v .d.ts | grep -v node_modules/ | grep -v .spec. | xargs tslint -t verbose",
     "prepare": "npm run tsc",
     "pretest": "npm run lint",
     "test": "mocha -r ts-node/register *.spec.ts",
@@ -41,7 +42,8 @@
   "dependencies": {
     "@types/express": "^4.0.0",
     "@types/mithril": "~1.1.0",
-    "tslib": "~1.7.0",
-    "mithril-node-render": "^2.1.0"
+    "express": "^4.0.0",
+    "mithril-node-render": "^2.1.0",
+    "tslib": "~1.7.0"
   }
 }

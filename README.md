@@ -7,6 +7,8 @@ mithril-express-middleware
 
 use mithril routes with express
 
+**this package is still very unstable**
+
 installation
 ------------
 

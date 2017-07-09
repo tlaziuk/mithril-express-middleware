@@ -22,6 +22,12 @@
     "pretty": true,
     "removeComments": true,
     "strict": true,
-    "target": "es5"
-  }
+    "target": "es2017"
+  },
+  "include": [
+    "**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
