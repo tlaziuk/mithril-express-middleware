@@ -36,5 +36,4 @@ app.use(mithrilExpress(routes));
 see also
 --------
 
-* [mithril-node-render](https://github.com/MithrilJS/mithril-node-render) to see what is behind the hood
 * [mithril.js](https://github.com/MithrilJS/mithril.js) to get know what is mithril

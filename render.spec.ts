@@ -2,8 +2,6 @@ import {
     expect,
 } from "chai";
 
-import * as m from "mithril";
-
 import {
     mock,
 } from "./mock";
