@@ -1,33 +1,35 @@
 // tslint:disable-next-line:no-reference
-/// <reference path="./types/mithril-node-render.d.ts" />
+/// <reference path="./types/mithril.d.ts" />
 
 import {
     Attributes,
     Children,
+    ClassComponent,
+    Component,
     ComponentTypes,
+    CVnode,
+    FactoryComponent,
     Lifecycle,
     RouteResolver,
     Vnode,
 } from "mithril";
 
-import mithrilRender from "./renderer";
+import mithrilRender, {
+    isComponentType,
+} from "mithril-render";
 
 export type Defs = ComponentTypes<any, any> | RouteResolver<any, any>;
-
-export function isComponent(thing: any): thing is ComponentTypes<Attributes, Lifecycle<Attributes, object>> {
-    return !!(thing && (thing.view || typeof thing === "function"));
-}
 
 export async function render(
     payload: Defs,
     params: { [_: string]: any } = {},
     path: string = "",
 ): Promise<string> {
-    if (isComponent(payload)) {
-        return await mithrilRender(payload, params);
+    // tslint:disable-next-line:whitespace
+    const m = await import("mithril/render/hyperscript");
+    if (isComponentType(payload)) {
+        return await mithrilRender(m(payload, params));
     } else {
-        // tslint:disable-next-line:whitespace
-        const m = await import("mithril");
         let component: Vnode<any, any>;
         if (payload.onmatch) {
             component = m(await payload.onmatch(params, path), params);
@@ -35,7 +37,7 @@ export async function render(
             component = m("div");
         }
         if (payload.render) {
-            return await mithrilRender(payload.render(component), params);
+            return await mithrilRender(payload.render(component));
         }
     }
     return "";
