@@ -1,6 +1,8 @@
 language: node_js
 sudo: false
 node_js:
+  - 4
+  - 5
   - 6
   - 7
   - 8
@@ -11,5 +13,4 @@ deploy:
     secure: "imp1U7Pl6pYcMxwg6boBQlRWf08hKl/9SyXcKIeG1HuL27DDsuvlsYZfdVBLPvHEwgGH89fFhdPv5AKpTmt8bBES/t3/LLTfCO4Wx0inXeUI+558yDB+RpWN8dtiKfOWGDqeDFL01zYnPfVTclzLR+mDVgAcQxqRov7YpANpD0E1WIAzXpxCYyO3SgEkJlZ0s0R4zfG2Ibm/nJ7caaHbJJqwjxZsDI2IRdSLdl/WucaoSnRbFW8hTLP5IaTNkahFIeqhP2jLl0S1YIxrV4B3Bt7f0PCqfhELAQNkJ/hcu4whtJ0EMzmQO/brHPC3mKSPDDThaQLJf7pnFbZhL355BhvMwpai8SlHTIxxG6hpqjyf0KZp/7tA9lxyGEz9JYOQwe/msPnGtYXlM4tkp5k3xELxU4BVI4kPE9DMPy10wg/FJw+Jxg5CelDvXhKHWF6/AkZpzwV3CgxDib2iopZkouevy1illJ+n555Q2yaF6b0ZDf6Ymf4feqhICvNYOI01ATC+c0wzctyFAV546UCQjJGv5HRsuOzwoOBnOzhnTBhHC+OljW+jsrAQpqDvUbmacvlIzR2g0dgZJOK/A3NkuCJ2wEb8z9USnVx8TRoRETqFS8mswW34sgLtXcF3TYfdGK+x1acNlNS4E+rxYL8gcJzWsOKnIKwBJ8BHBKnd4YQ="
   on:
     tags: true
-    branch: master
     repo: tlaziuk/mithril-express-middleware

@@ -6,24 +6,9 @@ import {
     mock,
 } from "./mock";
 
-import {
-    isComponent,
-    render,
-} from "./render";
+import render from "./render";
 
 mock(global);
-
-describe(isComponent.name, () => {
-    it("should be a function", () => {
-        expect(isComponent).to.be.a("function");
-    });
-    it("should return boolean", () => {
-        expect(isComponent(() => undefined)).to.be.a("boolean");
-        expect(isComponent(null)).to.be.a("boolean");
-        expect(isComponent(undefined)).to.be.a("boolean");
-        expect(isComponent({})).to.be.a("boolean");
-    });
-});
 
 describe(render.name, () => {
     it("should return Promise", () => {
