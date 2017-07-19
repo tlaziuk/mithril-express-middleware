@@ -2,10 +2,6 @@ import {
     expect,
 } from "chai";
 
-import {
-    mock,
-} from "./mock";
-
 import render from "./render";
 
 describe(render.name, () => {
