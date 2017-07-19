@@ -2,9 +2,7 @@ import {
     expect,
 } from "chai";
 
-import {
-    mock,
-} from "./mock";
+import mock from "./mock";
 
 describe(mock.name, () => {
     it("should mock window", () => {

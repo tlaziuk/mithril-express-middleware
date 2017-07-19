@@ -3,7 +3,7 @@
 
 import * as browserMock from "mithril/test-utils/browserMock";
 
-export function mock(env: object) {
+export function mock(env: object = global) {
     browserMock(env);
 }
 
