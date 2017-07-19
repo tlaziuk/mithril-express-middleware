@@ -3,7 +3,11 @@ import {
     expect,
 } from "chai";
 
-import * as m from "mithril";
+import {
+    RouteDefs,
+} from "mithril";
+
+import * as m from "mithril/render/hyperscript";
 
 import router from "./router";
 
@@ -16,7 +20,7 @@ describe(router.name, () => {
         "/abc/test": view,
         "/abc/:test": view,
         "/abc/:test...": view,
-    } as m.RouteDefs;
+    } as RouteDefs;
     it("should return Promise", () => {
         return expect(router(defs, "/")).to.be.instanceOf(Promise);
     });
