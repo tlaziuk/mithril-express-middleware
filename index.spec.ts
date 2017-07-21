@@ -11,6 +11,7 @@ import * as m from "mithril/render/hyperscript";
 
 import middleware, {
     parsePath,
+    render,
     router,
 } from "./index";
 
@@ -147,5 +148,14 @@ describe(parsePath.name, () => {
         expect(parsePath("/test?abc")).to.be.equal("/test");
         expect(parsePath("/test#abc")).to.be.equal("/test");
         expect(parsePath("/test?abc#abc")).to.be.equal("/test");
+    });
+});
+
+describe(render.name, () => {
+    it("should return Promise", () => {
+        expect(render({ view: () => "div" })).to.be.instanceOf(Promise);
+    });
+    it("should resolve to string", async () => {
+        expect(await render({ view: () => "div" })).to.be.a("string");
     });
 });
