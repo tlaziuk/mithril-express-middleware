@@ -25,10 +25,8 @@ import mithrilRender, {
     isComponentType,
 } from "mithril-render";
 
-export type Defs = ComponentTypes<any, any> | RouteResolver<any, any>;
-
 export async function render(
-    payload: Defs,
+    payload: ComponentTypes<any, any> | RouteResolver<any, any>,
     params: { [_: string]: any } = {},
     path: string = "",
 ): Promise<string> {
