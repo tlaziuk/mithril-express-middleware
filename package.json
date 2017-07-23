@@ -10,7 +10,7 @@
     "lint": "find . -name '*.ts' -print | grep -v .d.ts | grep -v node_modules/ | grep -v .spec. | xargs tslint -t verbose",
     "nyc": "nyc",
     "prepare": "npm run tsc",
-    "pretest": "npm run lint",
+    "pretest": "npm run clean && npm run lint",
     "test": "nyc mocha -r ts-node/register *.spec.ts",
     "tsc": "tsc"
   },
@@ -20,8 +20,7 @@
       ".tsx"
     ],
     "exclude": [
-      "**/*.spec.*",
-      "**/*.js"
+      "**/*.spec.*"
     ]
   },
   "repository": {
