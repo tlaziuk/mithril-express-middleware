@@ -1,6 +1,7 @@
 # mithril-express-middleware
 
 [![Build Status](https://travis-ci.org/tlaziuk/mithril-express-middleware.svg?branch=master)](https://travis-ci.org/tlaziuk/mithril-express-middleware)
+[![Coverage Status](https://coveralls.io/repos/github/tlaziuk/mithril-express-middleware/badge.svg?branch=master)](https://coveralls.io/github/tlaziuk/mithril-express-middleware?branch=master)
 [![dependencies Status](https://david-dm.org/tlaziuk/mithril-express-middleware/status.svg)](https://david-dm.org/tlaziuk/mithril-express-middleware)
 [![devDependencies Status](https://david-dm.org/tlaziuk/mithril-express-middleware/dev-status.svg)](https://david-dm.org/tlaziuk/mithril-express-middleware?type=dev)
 [![peerDependencies Status](https://david-dm.org/tlaziuk/mithril-express-middleware/peer-status.svg)](https://david-dm.org/tlaziuk/mithril-express-middleware?type=peer)
