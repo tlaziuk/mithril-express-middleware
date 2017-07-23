@@ -28,3 +28,4 @@ tags
 !/types/*.d.ts
 **.map
 !*.config.js
+.nyc_output/
