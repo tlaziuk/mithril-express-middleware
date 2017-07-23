@@ -4,6 +4,10 @@ import {
 } from "chai";
 
 import {
+    spy,
+} from "sinon";
+
+import {
     RouteDefs,
 } from "mithril";
 
