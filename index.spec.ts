@@ -87,6 +87,47 @@ describe(middleware.name, () => {
         expect(render.firstCall.args[0].attrs).to.be.eql({ test: "test" });
         expect(view.firstCall.args[0].attrs).to.be.eql({ test: "test" });
     });
+    it("should be working with express - request data as attrs", async () => {
+        const handler = middleware(routes, {
+            attrsBody: true,
+            attrsCookies: true,
+            attrsQuery: true,
+        });
+        const res = mockRes();
+        const req = mockReq({
+            body: { body: `test` },
+            cookies: { cookies: `test` },
+            query: { query: `test` },
+            path: "/",
+        });
+        const next = spy();
+        await handler(req as any, res as any, next as any);
+        expect(next.called).to.be.equal(false, `next was called, an exception was thrown`);
+        expect(onmatch.firstCall.args[0]).to.be.eql({ body: "test", cookies: "test", query: "test" });
+        expect(render.firstCall.args[0].attrs).to.be.eql({ body: "test", cookies: "test", query: "test" });
+        expect(view.firstCall.args[0].attrs).to.be.eql({ body: "test", cookies: "test", query: "test" });
+    });
+    it("should be working with express - attrs overwrite request data", async () => {
+        const handler = middleware(routes, {
+            attrs: { body: `attrs` },
+            attrsBody: true,
+            attrsCookies: true,
+            attrsQuery: true,
+        });
+        const res = mockRes();
+        const req = mockReq({
+            body: { body: `test` },
+            cookies: { cookies: `test` },
+            query: { query: `test` },
+            path: "/",
+        });
+        const next = spy();
+        await handler(req as any, res as any, next as any);
+        expect(next.called).to.be.equal(false, `next was called, an exception was thrown`);
+        expect(onmatch.firstCall.args[0]).to.be.eql({ body: "attrs", cookies: "test", query: "test" });
+        expect(render.firstCall.args[0].attrs).to.be.eql({ body: "attrs", cookies: "test", query: "test" });
+        expect(view.firstCall.args[0].attrs).to.be.eql({ body: "attrs", cookies: "test", query: "test" });
+    });
     it("should be working with express - route params", async () => {
         const handler = middleware(routes);
         const res = mockRes();
