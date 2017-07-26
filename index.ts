@@ -10,22 +10,44 @@ import {
 import routeRender from "mithril-route-render";
 
 export interface IOptions {
-    html: (partial: Promise<string>) => Promise<string>;
-    defaultRoute: string;
     attrs: Attributes;
+    attrsBody: boolean;
+    attrsCookies: boolean;
+    attrsQuery: boolean;
+    defaultRoute: string;
+    html: (partial: Promise<string>) => Promise<string>;
+    [_: string]: any;
 }
 
 export function mithrilExpressMiddleware(
     routes: RouteDefs,
-    {
-        html = (partial) => partial,
-        defaultRoute,
-        attrs = {},
-    }: Partial<IOptions> = {},
+    opt: Partial<IOptions> = {},
 ): RequestHandler {
-    return async (req, res, next) => {
+    return async (
+        {
+            path,
+            cookies,
+            body,
+            query,
+        },
+        {
+            send,
+        },
+        next,
+    ) => {
+        const {
+            attrsCookies = false,
+            attrs = {},
+            attrsBody = false,
+            attrsQuery = false,
+            defaultRoute,
+            html = (partial: Promise<string>) => partial,
+        } = opt;
         try {
-            res.send(await html(routeRender(routes, req.path, defaultRoute, {
+            send(await html(routeRender(routes, path, defaultRoute, {
+                ...(attrsCookies && cookies ? cookies : {}),
+                ...(attrsBody && body ? body : {}),
+                ...(attrsQuery && query ? query : {}),
                 ...attrs,
             }))).end();
         } catch (e) {
