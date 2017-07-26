@@ -1,126 +1,33 @@
-// tslint:disable-next-line:no-reference
-/// <reference path="./types/mithril.d.ts" />
-
 import {
     RequestHandler,
 } from "express";
 
 import {
     Attributes,
-    Children,
-    ClassComponent,
-    Component,
-    ComponentTypes,
-    CVnode,
-    FactoryComponent,
-    Lifecycle,
     RouteDefs,
-    RouteResolver,
-    Vnode,
 } from "mithril";
 
-import * as parseQueryString from "mithril/querystring/parse";
-
-import mithrilRender, {
-    isComponentType,
-} from "mithril-render";
-
-export async function render(
-    payload: ComponentTypes<any, any> | RouteResolver<any, any>,
-    params: { [_: string]: any } = {},
-    path: string = "",
-): Promise<string> {
-    // tslint:disable-next-line:whitespace
-    const m = await import("mithril/render/hyperscript");
-    if (isComponentType(payload)) {
-        return await mithrilRender(m(payload, params));
-    } else {
-        let component: Vnode<any, any>;
-        if (payload.onmatch) {
-            component = m(await payload.onmatch(params, path), params);
-        } else {
-            component = m("div");
-        }
-        if (payload.render) {
-            return await mithrilRender(payload.render(component));
-        }
-    }
-    return "";
-}
-
-// code from mithril.js internal method
-export function parsePath(
-    path: string,
-    queryData?: { [_: string]: any },
-    hashData: typeof queryData = queryData,
-): string {
-    const queryIndex = path.indexOf("?");
-    const hashIndex = path.indexOf("#");
-    const pathEnd = queryIndex > -1 ? queryIndex : hashIndex > -1 ? hashIndex : path.length;
-    if ((queryIndex > -1) && (typeof queryData !== "undefined")) {
-        const queryEnd = hashIndex > -1 ? hashIndex : path.length;
-        const queryParams = parseQueryString(path.slice(queryIndex + 1, queryEnd));
-        // tslint:disable-next-line:forin
-        for (const key in queryParams) {
-            queryData[key] = queryParams[key];
-        }
-    }
-    if ((hashIndex > -1) && (typeof hashData !== "undefined")) {
-        const hashParams = parseQueryString(path.slice(hashIndex + 1));
-        // tslint:disable-next-line:forin
-        for (const key in hashParams) {
-            hashData[key] = hashParams[key];
-        }
-    }
-    return path.slice(0, pathEnd);
-}
-
-export async function router(
-    routes: RouteDefs,
-    path: string,
-    defaultPath: string = path,
-): Promise<string> {
-    const params: { [_: string]: any } = {};
-    const pathname = parsePath(path, params, params);
-    // tslint:disable-next-line:forin
-    for (const route in routes) {
-        const matcher = new RegExp(
-            `^${route.replace(/:[^\/]+?\.{3}/g, "(.*?)").replace(/:[^\/]+/g, "([^\\/]+)")}\/?$`,
-        );
-        const matchArr = pathname.match(matcher);
-        if (matchArr !== null) {
-            const keys = route.match(/:[^\/]+/g) || [];
-            const [match, ...values] = matchArr;
-            // tslint:disable-next-line:forin
-            for (const i in keys) {
-                const key = keys[i];
-                const value = values[i];
-                params[key.replace(/:|\./g, "")] = decodeURIComponent(value);
-            }
-            return await render(routes[route], params, path);
-        }
-    }
-    if (path !== defaultPath) {
-        return await router(routes, defaultPath);
-    }
-    throw new Error(`Could not resolve route '${path}'`);
-}
+import routeRender from "mithril-route-render";
 
 export interface IOptions {
-    html: (partial: string | Promise<string>) => string | Promise<string>;
+    html: (partial: Promise<string>) => Promise<string>;
     defaultRoute: string;
+    attrs: Attributes;
 }
 
 export function mithrilExpressMiddleware(
-    route: RouteDefs,
+    routes: RouteDefs,
     {
         html = (partial) => partial,
         defaultRoute,
+        attrs = {},
     }: Partial<IOptions> = {},
 ): RequestHandler {
     return async (req, res, next) => {
         try {
-            res.send(await html(router(route, req.path, defaultRoute))).end();
+            res.send(await html(routeRender(routes, req.path, defaultRoute, {
+                ...attrs,
+            }))).end();
         } catch (e) {
             next();
         }
