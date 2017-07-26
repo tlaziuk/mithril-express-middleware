@@ -10,8 +10,6 @@
 
 use mithril routes with express
 
-**this package is still very unstable**
-
 ## installation
 
 ``` sh
@@ -37,4 +35,4 @@ app.use(mithrilExpress(routes));
 ## see also
 
 * [mithril.js](https://github.com/MithrilJS/mithril.js) to get know what is mithril
-* [mithril-render](https://github.com/tlaziuk/mithril-render) to see what's behind the hood
+* [mithril-route-render](https://github.com/tlaziuk/mithril-route-render) to see what's behind the hood
