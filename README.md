@@ -7,6 +7,7 @@
 [![peerDependencies Status](https://david-dm.org/tlaziuk/mithril-express-middleware/peer-status.svg)](https://david-dm.org/tlaziuk/mithril-express-middleware?type=peer)
 [![npm version](https://badge.fury.io/js/mithril-express-middleware.svg)](https://badge.fury.io/js/mithril-express-middleware)
 [![downloads](https://img.shields.io/npm/dm/mithril-express-middleware.svg)](https://www.npmjs.com/package/mithril-express-middleware)
+[![license](https://img.shields.io/npm/l/mithril-express-middleware.svg)](https://www.npmjs.com/package/mithril-express-middleware)
 
 use mithril routes with express
 
