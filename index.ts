@@ -24,15 +24,8 @@ export function mithrilExpressMiddleware(
     opt: Partial<IOptions> = {},
 ): RequestHandler {
     return async (
-        {
-            path,
-            cookies,
-            body,
-            query,
-        },
-        {
-            send,
-        },
+        req,
+        res,
         next,
     ) => {
         const {
@@ -44,16 +37,16 @@ export function mithrilExpressMiddleware(
             html = (partial: Promise<string>) => partial,
         } = opt;
         try {
-            send(
+            res.send(
                 await html(
                     routeRender(
                         routes,
-                        path,
+                        req.path,
                         defaultRoute,
                         {
-                            ...(attrsCookies && cookies ? cookies : {}),
-                            ...(attrsBody && body ? body : {}),
-                            ...(attrsQuery && query ? query : {}),
+                            ...(attrsCookies && req.cookies ? req.cookies : {}),
+                            ...(attrsBody && req.body ? req.body : {}),
+                            ...(attrsQuery && req.query ? req.query : {}),
                             ...attrs,
                         },
                     ),
