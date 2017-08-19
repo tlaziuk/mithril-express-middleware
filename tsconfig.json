@@ -7,10 +7,8 @@
     "inlineSourceMap": false,
     "inlineSources": false,
     "lib": [
-      "DOM",
-      "ES5",
-      "ES6",
-      "ES7"
+      "dom",
+      "esnext"
     ],
     "listFiles": false,
     "module": "commonjs",
