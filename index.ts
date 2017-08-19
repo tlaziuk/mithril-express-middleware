@@ -37,14 +37,23 @@ export function mithrilExpressMiddleware(
             html = (partial: Promise<string>) => partial,
         } = opt;
         try {
-            res.send(await html(routeRender(routes, req.path, defaultRoute, {
-                ...(attrsCookies && req.cookies ? req.cookies : {}),
-                ...(attrsBody && req.body ? req.body : {}),
-                ...(attrsQuery && req.query ? req.query : {}),
-                ...attrs,
-            }))).end();
+            res.send(
+                await html(
+                    routeRender(
+                        routes,
+                        req.path,
+                        defaultRoute,
+                        {
+                            ...(attrsCookies && req.cookies ? req.cookies : {}),
+                            ...(attrsBody && req.body ? req.body : {}),
+                            ...(attrsQuery && req.query ? req.query : {}),
+                            ...attrs,
+                        },
+                    ),
+                ),
+            ).end();
         } catch (e) {
-            next();
+            next(e);
         }
     };
 }
