@@ -46,6 +46,7 @@ describe(middleware.name, () => {
     });
     it("should return RequestHandler function", () => {
         expect(middleware(routes)).to.be.a("function");
+        expect(middleware(routes)).to.have.property("length").lt(4);
     });
     it("should be working with express res and req", async (done) => {
         try {
