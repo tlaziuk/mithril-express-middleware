@@ -224,4 +224,19 @@ describe(middleware.name, () => {
             done(err);
         }
     });
+    it("should this in res methods be instance of Response", async (done) => {
+        try {
+            const handler = middleware(routes);
+            const res = mockRes();
+            const req = mockReq({ path: "/" });
+            const next = spy();
+            await handler(req as any, res as any, next as any);
+            expect(res.send.called).to.be.equal(true, `'res.send' was not called`);
+            expect(res.send.firstCall.thisValue).to.be.not.a("undefined", `'this' is undefined`);
+            expect(res.send.firstCall.thisValue).to.be.equal(res, `'res.send' not called with the 'res' as 'this'`);
+            done();
+        } catch (err) {
+            done(err);
+        }
+    });
 });
