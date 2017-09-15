@@ -1,16 +1,14 @@
 language: node_js
 sudo: false
 node_js:
-  - 8
-  - 6
-  - 4
+  - node
+  - lts/*
 after_success: npm run coveralls
 deploy:
   provider: npm
-  email: "tlaziuk@gmail.com"
   skip_cleanup: true
-  api_key:
-    secure: "imp1U7Pl6pYcMxwg6boBQlRWf08hKl/9SyXcKIeG1HuL27DDsuvlsYZfdVBLPvHEwgGH89fFhdPv5AKpTmt8bBES/t3/LLTfCO4Wx0inXeUI+558yDB+RpWN8dtiKfOWGDqeDFL01zYnPfVTclzLR+mDVgAcQxqRov7YpANpD0E1WIAzXpxCYyO3SgEkJlZ0s0R4zfG2Ibm/nJ7caaHbJJqwjxZsDI2IRdSLdl/WucaoSnRbFW8hTLP5IaTNkahFIeqhP2jLl0S1YIxrV4B3Bt7f0PCqfhELAQNkJ/hcu4whtJ0EMzmQO/brHPC3mKSPDDThaQLJf7pnFbZhL355BhvMwpai8SlHTIxxG6hpqjyf0KZp/7tA9lxyGEz9JYOQwe/msPnGtYXlM4tkp5k3xELxU4BVI4kPE9DMPy10wg/FJw+Jxg5CelDvXhKHWF6/AkZpzwV3CgxDib2iopZkouevy1illJ+n555Q2yaF6b0ZDf6Ymf4feqhICvNYOI01ATC+c0wzctyFAV546UCQjJGv5HRsuOzwoOBnOzhnTBhHC+OljW+jsrAQpqDvUbmacvlIzR2g0dgZJOK/A3NkuCJ2wEb8z9USnVx8TRoRETqFS8mswW34sgLtXcF3TYfdGK+x1acNlNS4E+rxYL8gcJzWsOKnIKwBJ8BHBKnd4YQ="
+  email: $NPM_EMAIL
+  api_key: $NPM_API_KEY
   on:
     tags: true
     repo: tlaziuk/mithril-express-middleware
