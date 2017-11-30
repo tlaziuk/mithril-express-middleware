@@ -42,8 +42,7 @@
   },
   "homepage": "https://github.com/tlaziuk/mithril-express-middleware",
   "peerDependencies": {
-    "express": "^4.0.0",
-    "mithril": "~1.1.0"
+    "express": "^4.0.0 || ^5.0.0"
   },
   "devDependencies": {
     "@types/chai": "^4.0.0",
