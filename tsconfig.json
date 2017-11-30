@@ -13,12 +13,9 @@
     "listFiles": false,
     "module": "commonjs",
     "noEmitOnError": true,
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
     "preserveConstEnums": false,
     "pretty": true,
-    "removeComments": true,
+    "removeComments": false,
     "strict": true,
     "target": "es6"
   }
