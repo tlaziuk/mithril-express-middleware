@@ -10,16 +10,22 @@ import {
 import routeRender from "mithril-route-render";
 
 export interface IOptions {
+    /** Attributes to pass to the route */
     attrs: Attributes;
+    /** pass req.body to Attributes */
     attrsBody: boolean;
+    /** pass req.cookies to Attributes */
     attrsCookies: boolean;
+    /** pass req.query to Attributes */
     attrsQuery: boolean;
+    /** default route when nothig is matched */
     defaultRoute: string;
+    /** function parse resulting html */
     html: (partial: Promise<string>) => Promise<string>;
     [_: string]: any;
 }
 
-export function mithrilExpressMiddleware(
+export default function mithrilExpressMiddleware(
     routes: RouteDefs,
     opt: Partial<IOptions> = {},
 ): RequestHandler {
@@ -29,9 +35,9 @@ export function mithrilExpressMiddleware(
         next,
     ) => {
         const {
-            attrsCookies = false,
             attrs = {},
             attrsBody = false,
+            attrsCookies = false,
             attrsQuery = false,
             defaultRoute,
             html = (partial: Promise<string>) => partial,
@@ -58,5 +64,3 @@ export function mithrilExpressMiddleware(
         }
     };
 }
-
-export default mithrilExpressMiddleware;
