@@ -22,6 +22,8 @@ export interface IOptions {
     defaultRoute: string;
     /** function parse resulting html */
     html: (partial: Promise<string>) => Promise<string>;
+    /** flag to skip passing error to allow further execution */
+    skipError: boolean;
     [_: string]: any;
 }
 
@@ -41,9 +43,10 @@ export default function mithrilExpressMiddleware(
             attrsQuery = false,
             defaultRoute,
             html = (partial: Promise<string>) => partial,
+            skipError = false,
         } = opt;
         try {
-            const doc = await html(
+            res.send(await html(
                 routeRender(
                     routes,
                     req.path,
@@ -55,12 +58,9 @@ export default function mithrilExpressMiddleware(
                         ...attrs,
                     },
                 ),
-            );
-            res.send(
-                doc,
-            ).end();
+            )).end();
         } catch (e) {
-            next(e);
+            next(skipError ? void 0 : e);
         }
     };
 }
