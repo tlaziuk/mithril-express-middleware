@@ -239,4 +239,24 @@ describe(middleware.name, () => {
             done(err);
         }
     });
+    it("should 'skipError' flag be working", async (done) => {
+        try {
+            const handler = middleware(routes, {
+                skipError: true,
+            });
+            const res = mockRes();
+            const req = mockReq({ path: "" });
+            const next = spy();
+            await handler(req as any, res as any, next as any);
+            expect(res.send.called).to.be.equal(false, `'res.send' was called`);
+            expect(next.called).to.be.equal(true, `'next' was not called`);
+            expect(next.firstCall.args).to.have.property("length").equal(
+                0,
+                `'next' was called with args: ${JSON.stringify(next.firstCall.args)}`,
+            );
+            done();
+        } catch (err) {
+            done(err);
+        }
+    });
 });
