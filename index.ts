@@ -60,7 +60,11 @@ export default function mithrilExpressMiddleware(
                 ),
             )).end();
         } catch (e) {
-            next(skipError ? void 0 : e);
+            if (skipError) {
+                next();
+            } else {
+                next(e);
+            }
         }
     };
 }
