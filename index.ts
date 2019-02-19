@@ -1,12 +1,5 @@
-import {
-    RequestHandler,
-} from "express";
-
-import {
-    Attributes,
-    RouteDefs,
-} from "mithril";
-
+import { RequestHandler } from "express";
+import { Attributes, RouteDefs } from "mithril";
 import routeRender from "mithril-route-render";
 
 export interface IOptions {
@@ -20,7 +13,7 @@ export interface IOptions {
     attrsQuery: boolean;
     /** default route when nothig is matched */
     defaultRoute: string;
-    /** function parse resulting html */
+    /** function to parse route html */
     html: (partial: Promise<string>) => Promise<string>;
     /** flag to skip passing error to allow further execution */
     skipError: boolean;
@@ -29,36 +22,37 @@ export interface IOptions {
 
 export default function mithrilExpressMiddleware(
     routes: RouteDefs,
-    opt: Partial<IOptions> = {},
+    {
+        attrs = {},
+        attrsBody = false,
+        attrsCookies = false,
+        attrsQuery = false,
+        defaultRoute,
+        html = (partial: Promise<string>) => partial,
+        skipError = false,
+    }: Partial<IOptions> = {},
 ): RequestHandler {
     return async (
         req,
         res,
         next,
     ) => {
-        const {
-            attrs = {},
-            attrsBody = false,
-            attrsCookies = false,
-            attrsQuery = false,
-            defaultRoute,
-            html = (partial: Promise<string>) => partial,
-            skipError = false,
-        } = opt;
         try {
-            res.send(await html(
-                routeRender(
-                    routes,
-                    req.path,
-                    defaultRoute,
-                    {
-                        ...(attrsCookies && req.cookies ? req.cookies : {}),
-                        ...(attrsBody && req.body ? req.body : {}),
-                        ...(attrsQuery && req.query ? req.query : {}),
-                        ...attrs,
-                    },
+            res.send(
+                await html(
+                    routeRender(
+                        routes,
+                        req.path,
+                        defaultRoute,
+                        {
+                            ...(attrsCookies && req.cookies ? req.cookies : {}),
+                            ...(attrsBody && req.body ? req.body : {}),
+                            ...(attrsQuery && req.query ? req.query : {}),
+                            ...attrs,
+                        },
+                    ),
                 ),
-            )).end();
+            ).end();
         } catch (e) {
             if (skipError) {
                 next();
