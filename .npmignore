@@ -25,6 +25,5 @@ tags
 **.ts
 !**.d.ts
 **.spec.*
-**.map
 **.json
 .*
